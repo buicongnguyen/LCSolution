@@ -39,7 +39,7 @@ unordered_map<char, int> m;
 string removeDuplicateLetters(string s) 
 {
     string fi;
-    unordered_map<char, int> m;
+    unordered_map<char, int> m; // store char and index 
 
     for(int i=0;i<s.length();i++) // put to map all characters. 
         m[s[i]]++;
@@ -47,18 +47,18 @@ string removeDuplicateLetters(string s)
     if(fi.length()==m.size())    // no thing is repeated then just return the array fi // empty fi ... 
         return fi;
 
-    for(int i=0;i<s.length();i++){  
+    for(int i=0;i<s.length();i++){  // scan string 
 
-        while(fi.length()>0 && fi.back()>s[i] 
-              && m[fi.back()]>0 
-              && fi.find(s[i])==-1)
+        while(fi.length()>0 && fi.back()>s[i]  // if fi added already, last character fi > s[i] 
+              && m[fi.back()]>0                // still have other position later. 
+              && fi.find(s[i])==-1)            // not yet added s[i] --> remove last fi. // 
             fi.pop_back();  // remove last. 
 
 
-        if(fi.find(s[i])==-1)  // not yet found. 
-            fi.push_back(s[i]);  // put into array fi. 
+        if(fi.find(s[i])==-1)  // not yet have s[i] in fi.  
+            fi.push_back(s[i]);  // put into array fi: s[i]  
 
-        m[s[i]]--; // remove. 
+        m[s[i]]--; // remove.  // done the s[i] --> remove from histogram. 
     }    
     return fi;
 }
