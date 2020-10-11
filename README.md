@@ -1,2 +1,2 @@
-# LCSolution
+# LC Solution C++
 LCSolution
