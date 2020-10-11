@@ -11,18 +11,37 @@ boolean find(int value) Returns true if there exists any pair of numbers whose s
 class TwoSum {
 public:
     /** Initialize your data structure here. */
+    //unordered_set<int> dataSet;
+    vector<int> nums; 
     TwoSum() {
-        
+        // I will clear unordered set to null 
+        //dataSet.clear(); 
+        //nums.clear(); 
     }
     
     /** Add the number to an internal data structure.. */
     void add(int number) {
-        
+        // I will add the number to the hashmap 
+        // Complexity is O(1);
+        //dataSet.insert(number);
+        nums.push_back(number);
     }
     
     /** Find if there exists any pair of numbers which sum is equal to the value. */
     bool find(int value) {
-        
+        // I will use find in hash map the value: by one loop O(n)
+        // check if sum - value exist or not. 
+        // edge case: 
+        //if (dataSet[0] == value)
+        unordered_set<int> dataSet;
+        for (int i =0; i<nums.size();++i)
+        {            
+            if (dataSet.find((long int)value - (long int)nums[i] ) != dataSet.end())
+                return true; 
+            else 
+                dataSet.insert(nums[i]);
+        }
+        return false; 
     }
 };
 
