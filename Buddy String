@@ -20,7 +20,7 @@ public:
         for (int i =0; i< A.length(); i++)
         {
             if (A[i] == B[i])
-                hashmap[A[i]]++;
+                hashmap[A[i]]++; // at hashmap key A[i] increase value by one. // init value =0. 
             else 
             {
                 Adiff.push_back(A[i]);
