@@ -1,0 +1,55 @@
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        // use merge sort to have O(nlogn) time and O(1) space 
+        ListNode* mid = getMid(head);
+        ListNode* left = sortList(head);
+        ListNode* right = sortList(mid);
+        
+        return merge(left, right);
+    }
+    
+   
+    ListNode* merge(ListNode* list1, ListNode* list2)
+    {
+        ListNode dummyHead(0); // just for temp head
+        ListNode* ptr = &dummyHead; 
+        while (list1 && list2) // when two list not empty
+        {
+            if (list1->val < list2->val) // list1 smaller
+            {
+                ptr->next = list1; // connect to list1 
+                list1 = list1->next; // move on list 1
+            } else 
+            {
+                ptr->next = list2; 
+                list2 = list2->next; 
+            }
+            ptr = ptr->next; // loop until end l1 or l2
+            
+        }
+        // merge remain list
+        if (list1) ptr->next = list1; // connect to list1
+        else ptr->next = list2; // connect to list2
+        
+        return dummyHead.next; // from next of dummyH
+    }
+    
+    ListNode* getMid(ListNode* head) // and split into 2
+    {
+        ListNode* midPrev = nullptr; // prepare mid
+        while(head && head->next) // not yet end node 
+        {
+            if (midPrev == nullptr) // start to run 
+                midPrev = head; 
+            else 
+                midPrev = midPrev->next; // run slower. 
+            head = head->next->next; // head run faster. 
+        }
+        // split into 2 list: 
+        ListNode* mid = midPrev->next; // list from mid. 
+        midPrev->next = nullptr; // list from head
+        return mid; 
+    }
+    
+};
